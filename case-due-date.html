@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Change Payment Due Date — Natália Amaral</title>
+  <meta name="description" content="How Natália Amaral designed the logic and content for letting Personal Loan customers move their installment due date across every loan status."/>
+  <meta property="og:title" content="Change Payment Due Date — Natália Amaral"/>
+  <meta property="og:description" content="How Natália Amaral designed the logic and content for letting Personal Loan customers move their installment due date across every loan status."/>
+  <meta property="og:type" content="article"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,WONK@0,9..144,100..900,0;0,9..144,100..900,1;1,9..144,100..900,0;1,9..144,100..900,1&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #F5F3EE;
+      --white:   #FAFAF7;
+      --ink:     #111110;
+      --muted:   #7A7873;
+      --border:  #E5E2DB;
+      --f: 'Fraunces', Georgia, serif;
+      --b: 'DM Sans', system-ui, sans-serif;
+      --primary:      #1A5C3A;
+      --primary-soft: #2E7D52;
+      --primary-tint: #E9F0EA;
+      --accent:       #E8B800;
+      --accent-light: #F5D76E;
+      --footer-bg:    #1A5C3A;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: var(--b); -webkit-font-smoothing: antialiased; }
+
+    nav {
+      position: fixed; top: 1.25rem; left: 1.5rem; right: 1.5rem; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 1.5rem;
+      background: rgba(245,243,238,0.85);
+      backdrop-filter: blur(16px);
+      border-radius: 3rem;
+      box-shadow: 0 1px 24px rgba(17,17,16,0.05);
+    }
+    .nav-back { display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--muted); font-size: 0.8125rem; transition: color 0.2s; }
+    .nav-back:hover { color: var(--ink); }
+    .nav-logo { font-family: var(--f); font-weight: 900; font-style: italic; font-variation-settings: 'WONK' 1, 'opsz' 72; font-size: 1.25rem; color: var(--ink); text-decoration: none; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary); color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 500; padding: 0.55rem 1.1rem; border-radius: 2rem; transition: background 0.2s; }
+    .nav-cta:hover { background: var(--primary-soft); }
+
+    .case-hero { padding: 9rem clamp(2rem, 6vw, 7rem) 4rem; max-width: 1300px; margin: 0 auto; }
+    .case-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .case-tag { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); background: var(--primary-tint); padding: 0.3rem 0.8rem; border-radius: 2rem; }
+    .case-meta-line { font-size: 0.8125rem; color: var(--muted); margin-bottom: 1.75rem; }
+    .case-title { font-family: var(--f); font-weight: 900; font-style: italic; font-variation-settings: 'WONK' 0, 'opsz' 144; font-size: clamp(2.25rem, 5.5vw, 5.5rem); line-height: 1.0; letter-spacing: -0.025em; color: var(--ink); margin-bottom: 1.75rem; max-width: 20ch; }
+    .case-summary { font-size: clamp(1.0625rem, 1.1vw, 1.3rem); font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 72ch; margin-bottom: 3rem; }
+    .case-stats { display: flex; gap: 3rem; flex-wrap: wrap; }
+    .case-stat-num { font-family: var(--f); font-weight: 900; font-style: italic; font-variation-settings: 'WONK' 1, 'opsz' 144; font-size: 3rem; line-height: 1; letter-spacing: -0.04em; color: var(--primary); }
+    .case-stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.35rem; max-width: 18ch; line-height: 1.4; }
+
+    .case-hero-img-wrap { max-width: 1100px; margin: 0 auto 6rem; padding: 0 3rem; }
+    .img-placeholder { width: 100%; aspect-ratio: 16/6; border-radius: 1.25rem; background: var(--primary-tint); border: 2px dashed var(--primary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem; color: var(--primary); }
+    .img-placeholder svg { opacity: 0.5; }
+    .img-placeholder-label { font-size: 0.85rem; font-weight: 500; text-align: center; }
+    .img-placeholder-hint { font-size: 0.7rem; color: var(--muted); text-align: center; max-width: 36ch; }
+
+    .case-section { max-width: 1300px; margin: 0 auto; padding: 0 clamp(2rem, 6vw, 7rem) 6rem; }
+    .case-section-num { font-family: var(--f); font-weight: 900; font-style: italic; font-variation-settings: 'WONK' 1, 'opsz' 72; font-size: 0.95rem; color: var(--primary); margin-bottom: 1rem; display: block; }
+    .case-section-title { font-family: var(--f); font-weight: 900; font-style: italic; font-variation-settings: 'WONK' 0, 'opsz' 72; font-size: clamp(1.75rem, 3.2vw, 3.1rem); letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.5rem; }
+    .case-section-subtitle { font-size: 1rem; color: var(--muted); font-weight: 300; margin-bottom: 2.5rem; }
+    .case-section-lead { font-size: clamp(1.0625rem, 1.1vw, 1.3rem); font-weight: 300; color: var(--ink); line-height: 1.75; max-width: 78ch; margin-bottom: 2.5rem; }
+
+    .overview-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+    .overview-meta-card { background: var(--white); border-radius: 1.1rem; padding: 1.25rem 1.5rem; flex: 1; min-width: 180px; }
+    .overview-meta-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.4rem; }
+    .overview-meta-value { font-family: var(--f); font-weight: 700; font-style: italic; font-variation-settings: 'WONK' 0, 'opsz' 72; font-size: 1.05rem; color: var(--ink); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .pill-card { background: var(--white); border-radius: 1.25rem; padding: 1.75rem; }
+    .pill-card-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1.25rem; display: block; color: var(--muted); }
+    .pill-card.problem .pill-card-label { color: #B85C38; }
+    .pill-card.principles .pill-card-label { color: var(--primary); }
+    .pill-list { display: flex; flex-direction: column; gap: 1rem; }
+    .pill-list li { font-size: 0.875rem; color: var(--ink); line-height: 1.5; font-weight: 400; list-style: none; padding-left: 1.1rem; position: relative; }
+    .pill-card.problem .pill-list li::before { content: ''; position: absolute; left: 0; top: 0.45rem; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: #B85C38; }
+    .pill-card.principles .pill-list li::before { content: ''; position: absolute; left: 0; top: 0.45rem; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--primary); }
+
+    .phase-block { margin-bottom: 4rem; }
+    .phase-block:last-child { margin-bottom: 0; }
+    .phase-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+    .phase-num { font-family: var(--f); font-weight: 900; font-style: italic; font-variation-settings: 'WONK' 1, 'opsz' 72; font-size: 1.1rem; color: var(--primary); white-space: nowrap; }
+    .phase-title { font-family: var(--f); font-weight: 700; font-style: italic; font-variation-settings: 'WONK' 0, 'opsz' 72; font-size: 1.5rem; color: var(--ink); letter-spacing: -0.015em; }
+    .phase-lead { font-size: 0.95rem; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 68ch; margin-bottom: 1.75rem; }
+    .phase-cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .phase-cards-grid.two { grid-template-columns: repeat(2, 1fr); }
+    .phase-card { background: var(--white); border-radius: 1.1rem; padding: 1.4rem; }
+    .phase-card-title { font-size: 0.85rem; font-weight: 600; color: var(--primary); margin-bottom: 0.6rem; }
+    .phase-card-desc { font-size: 0.825rem; color: var(--muted); line-height: 1.55; font-weight: 300; }
+    .phase-closer { font-size: 0.9rem; font-style: italic; color: var(--ink); font-weight: 400; margin-top: 1.75rem; padding: 1.25rem 1.5rem; background: var(--primary-tint); border-radius: 1rem; max-width: 70ch; }
+    .phase-closer strong { font-style: normal; font-weight: 600; }
+
+    .scope-flow { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .scope-chip { background: var(--white); border-radius: 2rem; padding: 0.7rem 1.25rem; font-size: 0.85rem; color: var(--ink); font-weight: 400; display: inline-flex; align-items: center; gap: 0.5rem; }
+    .scope-chip::before { content: ''; width: 0.4rem; height: 0.4rem; border-radius: 50%; background: var(--accent); }
+
+    .research-list { display: flex; flex-direction: column; gap: 1rem; }
+    .research-item { background: var(--white); border-radius: 1.1rem; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .research-tag { flex-shrink: 0; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--primary); background: var(--primary-tint); padding: 0.3rem 0.65rem; border-radius: 2rem; margin-top: 0.1rem; }
+    .research-q { font-size: 0.9rem; color: var(--ink); line-height: 1.55; font-weight: 400; }
+
+    .next-step-block { background: var(--white); border-radius: 1.25rem; padding: 2rem; }
+    .next-step-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--primary); margin-bottom: 0.75rem; }
+    .next-step-desc { font-size: 0.95rem; color: var(--ink); line-height: 1.65; font-weight: 300; max-width: 70ch; }
+
+    footer { position: relative; overflow: hidden; margin: 0 1.5rem 1.5rem; border-radius: 2rem; padding: 3rem 3.5rem; background: var(--footer-bg); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-cobogo { position: absolute; inset: 0; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='52' height='52'%3E%3Crect width='52' height='52' fill='none'/%3E%3Crect x='8' y='8' width='36' height='36' fill='none' stroke='%23F5F3EE' stroke-width='4.5'/%3E%3Crect x='8' y='8' width='36' height='36' fill='none' stroke='%23F5F3EE' stroke-width='4.5' transform='rotate(45 26 26)'/%3E%3C/svg%3E"); background-size: 52px 52px; opacity: 0.1; }
+    .footer-name { position: relative; z-index: 2; font-family: var(--f); font-weight: 900; font-style: italic; font-variation-settings: 'WONK' 0, 'opsz' 72; font-size: 1.1rem; color: #fff; }
+    .footer-contact { position: relative; z-index: 2; font-size: 0.85rem; color: rgba(245,243,238,0.85); }
+    .footer-contact a { color: inherit; text-decoration: none; }
+    .footer-contact a:hover { color: #fff; }
+
+    @media (max-width: 900px) {
+      .two-col, .phase-cards-grid, .phase-cards-grid.two { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 0.65rem 1rem; top: 0.85rem; left: 1rem; right: 1rem; }
+      .nav-back span { display: none; }
+      .case-hero { padding: 8rem 1.25rem 3rem; }
+      .case-hero-img-wrap { padding: 0 1.25rem; margin-bottom: 4rem; }
+      .case-section { padding: 0 1.25rem 4rem; }
+      .case-stats { gap: 2rem; }
+      .research-item { flex-direction: column; gap: 0.5rem; }
+      footer { margin: 0 0.75rem 0.75rem; padding: 2.25rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Back to projects</span>
+    </a>
+    <a href="index.html" class="nav-logo">NA</a>
+    <a href="https://www.linkedin.com/in/natalia-amaral-soares/" target="_blank" rel="noopener" class="nav-cta">LinkedIn ↗</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="case-hero">
+    <div class="case-tags">
+      <span class="case-tag">Product Design</span>
+      <span class="case-tag">Content Design</span>
+      <span class="case-tag">Usability Research</span>
+    </div>
+    <p class="case-meta-line">2026 · PicPay</p>
+    <h1 class="case-title">Change Payment Due Date</h1>
+    <p class="case-summary">How I designed the logic and content for letting Personal Loan customers move their installment due date — handling every loan status, from current to overdue to refinanced — and defined the research plan to validate it before rollout.</p>
+
+    <div class="case-stats">
+      <div>
+        <div class="case-stat-num">5</div>
+        <div class="case-stat-label">loan products this feature needs to support</div>
+      </div>
+      <div>
+        <div class="case-stat-num">6+</div>
+        <div class="case-stat-label">loan states mapped for eligibility</div>
+      </div>
+      <div>
+        <div class="case-stat-num">3+1</div>
+        <div class="case-stat-label">quick date options plus full calendar</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="case-hero-img-wrap">
+    <div class="img-placeholder" style="border: none; padding: 0;">
+      <img src="data:image/jpeg;base64,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N144nKce3z+/Y8EZZzh26n79il5Qmfv+Cyz+pT/z1a5P4c874vm3B8Jq6PLzaetr4KeUxUkweGPka06SZiAbE2uD8y6engy1GaQvytnSbiJA+TXk6jHhAHO1+mmFgenRpPmIWzMXyRiuJ5Yjy5wd4vhdRT4/R1E9S7L5pmtha86rvDdhuCb7behYrVjn0luf9aOfSX8HsyIi+g+qIiICIiAiIgIiICIiAiIgIiICIiAiIgIiICIiAiIgIiIIaIigzg8qFJUMEg3BsV91v6x9aCWiia39Y+tNb+sfWrYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYlrXUwQVVNLTVMMc8ErCySORoc17SLFpB2II2stGt/WPrTW/rH1pYqvtIyX2Qy//AJbD8KfaRkvshl//AC2H4Va639Y+tNb+sfWscGPcx0eHcqvtIyX2Qy//AJbD8K2U2Tso0tTFU02VsDgnieHxyR4fE1zHA3DgQ24IO91Y639Y+tNb+sfWnDj3HR4dyWiia39Y+tNb+sfWt22loomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrTW/rH1pYloomt/WPrRLH/2Q==" alt="Change due date decision flow diagram" style="width:100%; height:100%; object-fit:cover; border-radius: 1.25rem;"/>
+    </div>
+  </div>
+
+  <!-- 01 OVERVIEW -->
+  <section class="case-section">
+    <span class="case-section-num">01</span>
+    <h2 class="case-section-title">Overview</h2>
+    <p class="case-section-subtitle">One button, many possible states behind it</p>
+    <p class="case-section-lead">"Change due date" sounds like a simple feature — pick a new day, done. In practice, a Personal Loan customer can be current, overdue by one or several installments, mid-payment on a partial installment, or already refinanced (extended or with cash-out) — and each state changes whether the change is even allowed. I designed the eligibility logic, the date-selection experience, and the content that explains what changes, plus the research plan to validate comprehension before this ships across every loan product.</p>
+
+    <div class="overview-meta">
+      <div class="overview-meta-card">
+        <div class="overview-meta-label">My role</div>
+        <div class="overview-meta-value">Product Designer</div>
+      </div>
+      <div class="overview-meta-card">
+        <div class="overview-meta-label">Scope</div>
+        <div class="overview-meta-value">Flow logic, content & research plan</div>
+      </div>
+      <div class="overview-meta-card">
+        <div class="overview-meta-label">Products covered</div>
+        <div class="overview-meta-value">Clean, Refin, Salary-linked, CredFlex, PicPay Parcela</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 CHALLENGE -->
+  <section class="case-section">
+    <span class="case-section-num">02</span>
+    <h2 class="case-section-title">The challenge</h2>
+    <p class="case-section-subtitle">Complexity that had to stay invisible to the customer</p>
+    <p class="case-section-lead">The eligibility logic behind this feature is genuinely complex — but the customer should never feel that. Whatever state their loan is in, they need a clear answer: yes you can, here's how; or no you can't, here's why and what to do instead.</p>
+
+    <div class="two-col">
+      <div class="pill-card problem">
+        <span class="pill-card-label">What made it hard</span>
+        <ul class="pill-list">
+          <li>The feature needs to work across five loan products with different underlying rules</li>
+          <li>Eligibility depends on loan status: current, due today, overdue by one installment, overdue by two or more, partially paid, or already refinanced</li>
+          <li>A refinanced loan behaves differently depending on whether it was extended or had cash-out — extended contracts can't be extended again, but can still get cash-out</li>
+          <li>Changing the due date recalculates the installment value, IOF, interest, and the contract's end date — all of which needed to be shown transparently</li>
+          <li>The change can only be made once per loan — a rule easy to state, easy to miss</li>
+        </ul>
+      </div>
+      <div class="pill-card principles">
+        <span class="pill-card-label">Principles behind the solution</span>
+        <ul class="pill-list">
+          <li>Offer pre-calculated quick date options first, with a full calendar as a fallback</li>
+          <li>Always show a clear before/after: old value and date next to the new ones</li>
+          <li>Block ineligible states early, with a plain-language reason and a next step — pay, refinance, or go home</li>
+          <li>Reuse PicPay's existing loan-management components so the feature feels native, not bolted on</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 PROCESS -->
+  <section class="case-section">
+    <span class="case-section-num">03</span>
+    <h2 class="case-section-title">The process</h2>
+    <p class="case-section-subtitle">From decision tree to screen content</p>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-num">Phase 1</span>
+        <span class="phase-title">Mapping the eligibility logic</span>
+      </div>
+      <p class="phase-lead">Before designing a single screen, I mapped every loan state that could reach this feature — because the entry point is the same button, but what happens after it depends entirely on the account behind it.</p>
+      <div class="scope-flow">
+        <span class="scope-chip">Current, no pending installments</span>
+        <span class="scope-chip">Installment due today</span>
+        <span class="scope-chip">Overdue — 1 installment</span>
+        <span class="scope-chip">Overdue — 2+ installments</span>
+        <span class="scope-chip">Partially paid installment</span>
+        <span class="scope-chip">Refinanced — extended</span>
+        <span class="scope-chip">Refinanced — cash-out</span>
+      </div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-num">Phase 2</span>
+        <span class="phase-title">Designing the date-selection flow</span>
+      </div>
+      <p class="phase-lead">For eligible customers, I designed three pre-calculated quick options — longer, medium, and shorter grace periods — each showing the updated installment value up front, plus a "see all available dates" option that opens a full calendar for anyone who wants more control.</p>
+      <div class="phase-cards-grid">
+        <div class="phase-card">
+          <div class="phase-card-title">Quick options first</div>
+          <p class="phase-card-desc">Three ready-made dates calculated from the loan's grace-period parameters, each labeled with its updated installment value — no math required from the customer.</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-card-title">Calendar as fallback</div>
+          <p class="phase-card-desc">A full calendar view opens with no date pre-selected, showing the month with the last possible choice — the "Continue" button only enables once a date is picked.</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-card-title">Same-day nuance</div>
+          <p class="phase-card-desc">If an installment is due that same day, the copy makes clear it won't be affected — the change only applies to future installments, avoiding any confusion about what's being charged right now.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-num">Phase 3</span>
+        <span class="phase-title">Making the trade-off transparent</span>
+      </div>
+      <p class="phase-lead">Moving the due date isn't free — it adds days to the loan, which recalculates the installment value, IOF, interest, and the contract's end date. I designed a dedicated comparison screen so none of that is a surprise.</p>
+      <div class="phase-cards-grid two">
+        <div class="phase-card">
+          <div class="phase-card-title">Side-by-side comparison</div>
+          <p class="phase-card-desc">Old due date and value shown directly against the new ones, with IOF, interest, and the new contract end date broken out — plus a link explaining why the values change.</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-card-title">One-time-only disclaimer</div>
+          <p class="phase-card-desc">A persistent note that this change can only be made once per loan, placed right above the confirm button — not buried in a paragraph above it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-block">
+      <div class="phase-header">
+        <span class="phase-num">Phase 4</span>
+        <span class="phase-title">Designing for the edge cases</span>
+      </div>
+      <p class="phase-lead">Customers with overdue installments can't change their due date — but simply hiding the option would be confusing. I designed dedicated blocking screens that explain why and offer a real next step.</p>
+      <div class="phase-cards-grid">
+        <div class="phase-card">
+          <div class="phase-card-title">Clear blocking message</div>
+          <p class="phase-card-desc">"Keep your installments up to date to unlock this" replaces a dead-end error, paired with the specific reason: an overdue or partially paid installment.</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-card-title">A real path forward</div>
+          <p class="phase-card-desc">Instead of a dead end, the customer sees direct actions — pay the overdue installment, or refinance for extra breathing room — depending on what they're eligible for.</p>
+        </div>
+        <div class="phase-card">
+          <div class="phase-card-title">Multi-channel confirmation</div>
+          <p class="phase-card-desc">Once a change is processed, the customer gets in-app feedback plus a push notification and email confirming the new due date — closing the loop the same way the cancellation flow does.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 RESEARCH PLAN -->
+  <section class="case-section">
+    <span class="case-section-num">04</span>
+    <h2 class="case-section-title">Usability research plan</h2>
+    <p class="case-section-subtitle">What we need to validate before this rolls out everywhere</p>
+    <p class="case-section-lead">Because this feature touches five products with different rules, I defined a set of moderated-research questions to run before expanding past the first product — testing discoverability, comprehension, and behavior, not just whether people can technically complete the flow.</p>
+
+    <div class="research-list">
+      <div class="research-item">
+        <span class="research-tag">Discoverability</span>
+        <span class="research-q">Is the "Change due date" button easy to find from the loan management screen?</span>
+      </div>
+      <div class="research-item">
+        <span class="research-tag">Comprehension</span>
+        <span class="research-q">Do people understand the updated-value text next to each quick date option?</span>
+      </div>
+      <div class="research-item">
+        <span class="research-tag">Behavior</span>
+        <span class="research-q">Do people pick one of the ready-made dates, or go straight to the full calendar?</span>
+      </div>
+      <div class="research-item">
+        <span class="research-tag">Comprehension</span>
+        <span class="research-q">Do people understand the left column of the comparison table refers to their current due date?</span>
+      </div>
+      <div class="research-item">
+        <span class="research-tag">Comprehension</span>
+        <span class="research-q">Do people notice and understand the "only once per loan" disclaimer before confirming?</span>
+      </div>
+      <div class="research-item">
+        <span class="research-tag">Flow timing</span>
+        <span class="research-q">Does placing the satisfaction survey right after entering a password create anxiety before people see confirmation feedback?</span>
+      </div>
+      <div class="research-item">
+        <span class="research-tag">Content clarity</span>
+        <span class="research-q">Is the overall content of the flow understandable end to end, without needing Support?</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 NEXT STEPS -->
+  <section class="case-section">
+    <span class="case-section-num">05</span>
+    <h2 class="case-section-title">Next steps</h2>
+    <p class="case-section-subtitle">Rolling out product by product</p>
+    <div class="next-step-block">
+      <div class="next-step-label">In progress</div>
+      <p class="next-step-desc">The plan is to run moderated usability sessions against the questions above on the Clean loan product first, since it has the simplest eligibility rules, then extend the feature to Refin, Salary-linked, CredFlex, and PicPay Parcela once the core flow is validated.</p>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-cobogo"></div>
+    <span class="footer-name">Natália Amaral</span>
+    <span class="footer-contact"><a href="mailto:nataliamaralssoares@gmail.com">nataliamaralssoares@gmail.com</a> · <a href="tel:+5511992732880">+55 11 99273-2880</a></span>
+  </footer>
+
+</body>
+</html>
