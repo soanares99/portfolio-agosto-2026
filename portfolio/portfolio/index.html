@@ -188,6 +188,18 @@
     .lang-pill-right { display: flex; align-items: center; gap: 0.65rem; }
     .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 2.5rem; }
 
+    /* Education gets larger type than default exp pills */
+    .edu-pill .exp-company { font-size: clamp(1.15rem, 1.45vw, 1.65rem); }
+    .edu-pill .exp-cert-type { font-size: clamp(0.85rem, 1vw, 1.1rem); }
+    .edu-pill .exp-period { font-size: clamp(0.78rem, 0.9vw, 1rem); }
+
+    /* Languages: full-width row of pills, larger type */
+    .lang-section { margin-top: 2.5rem; }
+    .lang-flow { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+    .lang-flow .lang-pill { flex: 1 1 220px; padding: clamp(1.1rem, 1.3vw, 1.6rem) clamp(1.4rem, 1.6vw, 1.9rem); }
+    .lang-flow .exp-company { font-size: clamp(1.15rem, 1.45vw, 1.65rem); }
+    .lang-flow .exp-period { font-size: clamp(0.85rem, 1vw, 1.05rem); }
+
     /* ── FOOTER = CONTATO fundido ── */
     footer {
       position: relative; overflow: hidden;
@@ -342,7 +354,7 @@
 
         <div class="meta-grid">
           <div>
-            <p class="skills-label">Experience</p>
+            <p class="skills-label">Latest Experience</p>
             <div class="exp-flow">
               <div class="exp-pill exp-pill-detailed">
                 <div class="exp-pill-top">
@@ -375,38 +387,40 @@
           <div>
             <p class="skills-label">Education</p>
             <div class="exp-flow">
-              <div class="exp-pill">
+              <div class="exp-pill edu-pill">
                 <div><div class="exp-company">Digital Design</div><div class="exp-cert-type">Bachelor's Degree</div></div>
                 <div class="exp-period">2019–22</div>
               </div>
-              <div class="exp-pill">
+              <div class="exp-pill edu-pill">
                 <div><div class="exp-company">Computer Engineering</div><div class="exp-cert-type">Degree (incomplete)</div></div>
                 <div class="exp-period">2017–18</div>
               </div>
-              <div class="exp-pill">
+              <div class="exp-pill edu-pill">
                 <div><div class="exp-company">Systems Analysis</div><div class="exp-cert-type">Technical Diploma</div></div>
                 <div class="exp-period">2015–16</div>
               </div>
             </div>
+          </div>
+        </div>
 
-            <p class="skills-label" style="margin-top:2rem;">Languages</p>
-            <div class="exp-flow">
-              <div class="exp-pill lang-pill">
-                <div class="exp-company">Portuguese</div>
-                <div class="lang-pill-right"><span class="exp-period">Native</span></div>
-              </div>
-              <div class="exp-pill lang-pill">
-                <div class="exp-company">English</div>
-                <div class="lang-pill-right"><span class="exp-period">Advanced</span></div>
-              </div>
-              <div class="exp-pill lang-pill">
-                <div class="exp-company">Spanish</div>
-                <div class="lang-pill-right"><span class="exp-period">Intermediate</span></div>
-              </div>
-              <div class="exp-pill lang-pill">
-                <div class="exp-company">French</div>
-                <div class="lang-pill-right"><span class="exp-period">Beginner</span></div>
-              </div>
+        <div class="lang-section">
+          <p class="skills-label" style="margin-top:2.5rem;">Languages</p>
+          <div class="lang-flow">
+            <div class="exp-pill lang-pill">
+              <div class="exp-company">Portuguese</div>
+              <div class="lang-pill-right"><span class="exp-period">Native</span></div>
+            </div>
+            <div class="exp-pill lang-pill">
+              <div class="exp-company">English</div>
+              <div class="lang-pill-right"><span class="exp-period">Advanced</span></div>
+            </div>
+            <div class="exp-pill lang-pill">
+              <div class="exp-company">Spanish</div>
+              <div class="lang-pill-right"><span class="exp-period">Intermediate</span></div>
+            </div>
+            <div class="exp-pill lang-pill">
+              <div class="exp-company">French</div>
+              <div class="lang-pill-right"><span class="exp-period">Beginner</span></div>
             </div>
           </div>
         </div>
