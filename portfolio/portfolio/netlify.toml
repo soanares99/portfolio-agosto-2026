@@ -1,0 +1,7 @@
+[[edge_functions]]
+  path = "/case-cancellation.html"
+  function = "cancellation-gate"
+
+[[edge_functions]]
+  path = "/case-due-date.html"
+  function = "duedate-gate"
