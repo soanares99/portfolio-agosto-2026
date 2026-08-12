@@ -136,16 +136,16 @@
     .card:hover .card-arrow { opacity: 1; transform: translateY(0); }
 
     /* ── SOBRE — fluido, com foto ── */
-    .sobre-grid { display: block; max-width: 86ch; }
+    .sobre-grid { display: block; }
 
     .sobre-intro {
       font-family: var(--f); font-weight: 700; font-style: italic;
       font-variation-settings: 'WONK' 0, 'opsz' 72;
       font-size: clamp(1.6rem, 2.6vw, 2.6rem); color: var(--ink); line-height: 1.25;
-      letter-spacing: -0.015em; margin-bottom: 1.5rem;
+      letter-spacing: -0.015em; margin-bottom: 1.5rem; max-width: 75ch;
     }
     .sobre-intro em { color: var(--primary); font-style: italic; transition: color 0.4s; }
-    .sobre-body { font-size: clamp(1rem, 1vw, 1.2rem); font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1.1rem; }
+    .sobre-body { font-size: clamp(1rem, 1vw, 1.2rem); font-weight: 300; color: var(--muted); line-height: 1.75; margin-bottom: 1.1rem; max-width: 75ch; }
 
     .skills-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.25rem; }
     .skills-flow { display: flex; flex-wrap: wrap; gap: 0.75rem; }
